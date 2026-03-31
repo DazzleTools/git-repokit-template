@@ -10,7 +10,6 @@ on:
 
 permissions:
   contents: write
-  workflows: write
 
 jobs:
   setup:
@@ -69,7 +68,7 @@ jobs:
           # Find all text files (exclude .git/ and binary files)
           find . -type f \
             -not -path './.git/*' \
-            -not -path './.github/workflows/setup-from-template.yml' \
+            -not -path './.github/workflows/*' \
             -not -name '*.png' -not -name '*.jpg' -not -name '*.gif' \
             -not -name '*.ico' -not -name '*.woff*' \
             | while read file; do

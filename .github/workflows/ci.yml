@@ -37,10 +37,13 @@ jobs:
     - name: Lint with flake8
       run: |
         pip install flake8
+        # Auto-detect the Python package directory
+        PKG_DIR=$(python -c "import pathlib; dirs=[d for d in pathlib.Path('.').iterdir() if d.is_dir() and (d / '__init__.py').exists() and not d.name.startswith('.')]; print(dirs[0] if dirs else '.')")
+        echo "Linting: $PKG_DIR"
         # Stop the build if there are Python syntax errors or undefined names
-        flake8 $PACKAGE_NAME/ --count --select=E9,F63,F7,F82 --show-source --statistics
+        flake8 "$PKG_DIR"/ --count --select=E9,F63,F7,F82 --show-source --statistics
         # Exit-zero treats all errors as warnings
-        flake8 $PACKAGE_NAME/ --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
+        flake8 "$PKG_DIR"/ --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
       continue-on-error: true
 
     - name: Run tests

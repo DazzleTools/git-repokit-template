@@ -8,6 +8,8 @@ on:
 
 jobs:
   test:
+    # Skip on the template repo itself (no pyproject.toml until instantiated)
+    if: github.repository != 'DazzleTools/git-repokit-template'
     runs-on: windows-latest
     strategy:
       matrix:

@@ -18,7 +18,7 @@ jobs:
     # Only run if this is NOT the template repo itself
     if: github.repository != 'DazzleTools/git-repokit-template'
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
 
